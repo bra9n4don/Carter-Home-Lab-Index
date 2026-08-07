@@ -16,6 +16,11 @@ Umbrella index for home-lab agent development, learning, and personal projects.
 The `ai/` folder contains repo-specific instructions for Copilot and other agents.
 See [`ai/instructions.md`](ai/instructions.md) for the operating rules.
 
+## Progress tracking
+
+- Repo-wide progress is tracked in [`progress-tracker.md`](progress-tracker.md).
+- It auto-syncs via [`.github/workflows/sync-progress-tracker.yml`](.github/workflows/sync-progress-tracker.yml).
+
 ## Quick start
 
 1. Pick the top-level area that matches your work.

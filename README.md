@@ -4,6 +4,35 @@ Umbrella home-lab index for **agent development**, **learning courses**, and **p
 
 ---
 
+## 📌 Quick Start
+
+1. Choose a workspace:
+   - 🤖 [`agents/`](agents/)
+   - 📚 [`learning/`](learning/)
+   - 🛠️ [`personal-projects/`](personal-projects/)
+2. Add or update the local README in that area.
+3. Move active work into the correct subfolder (`active/`, `courses/`, etc.).
+4. Commit changes with a clear message:
+   - `feat(agents): ...`
+   - `docs(learning): ...`
+   - `chore(projects): ...`
+
+---
+
+## 🔗 Future Dedicated Repositories (Placeholders)
+
+> Replace these with real repo links when you split work into standalone repositories.
+
+- **Agents Hub:** `https://github.com/bra9n4don/<agents-repo>`
+- **Learning Hub:** `https://github.com/bra9n4don/<learning-repo>`
+- **Personal Projects Hub:** `https://github.com/bra9n4don/<personal-projects-repo>`
+
+Optional extras:
+- **Course Notes Repo:** `https://github.com/bra9n4don/<course-notes-repo>`
+- **Project Portfolio Repo:** `https://github.com/bra9n4don/<portfolio-repo>`
+
+---
+
 ## 🔭 Purpose
 
 This repository is my single source of truth for organizing and navigating:

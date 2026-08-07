@@ -15,7 +15,7 @@ This repository is an umbrella index for:
 
 Read and follow:
 
-- `/home/runner/work/Carter-Home-Lab-Index/Carter-Home-Lab-Index/ai/instructions.md`
+- `ai/instructions.md`
 
 ## Working style
 

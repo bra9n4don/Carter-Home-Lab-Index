@@ -12,12 +12,11 @@ on:
   schedule:
     - cron: "0 6 * * *"
 
-permissions:
-  contents: write
-
 jobs:
   sync-progress-tracker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,7 +31,7 @@ jobs:
 
       - name: Commit and push tracker changes
         run: |
-          if git diff --quiet; then
+          if git diff --quiet -- progress-tracker.md; then
             echo "No tracker changes detected."
             exit 0
           fi

@@ -1,0 +1,23 @@
+# docker-compose base template
+
+# Copy this file into your app subfolder and customize it.
+# Usage: docker compose -f docker-compose.yml up -d
+
+services:
+  app:
+    image: your-image:latest
+    container_name: app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"          # host:container
+    volumes:
+      - ./data:/data          # persistent storage
+      - ./config:/config      # config files
+    environment:
+      - TZ=America/Chicago    # set your timezone
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true            # pre-create with: docker network create homelab

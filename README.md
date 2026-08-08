@@ -70,10 +70,10 @@ This repository is my single source of truth for organizing and navigating:
 
 ## ✅ Operating Rhythm (Simple)
 
-- Capture first in `ideas/` or `notes/`
-- Move to `active/` when work starts
-- Document what changed in the local README/docs
-- Move to `completed/` or `archive/` when done
+- **Personal projects:** capture in `ideas/`, move work to `active/`, then to `completed/`
+- **Agents:** build in `active/`, keep design notes in `docs/`, then move retired agents to `archive/`
+- **Learning:** organize work under `courses/`, `notes/`, `resources/`, or `certifications/` as appropriate
+- Document organizational changes in the relevant local README or docs
 
 ---
 

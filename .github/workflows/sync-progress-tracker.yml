@@ -1,0 +1,42 @@
+name: Sync Progress Tracker
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "learning/**"
+      - "personal-projects/**"
+      - "scripts/update_progress_tracker.py"
+  schedule:
+    - cron: "0 6 * * *"
+
+jobs:
+  sync-progress-tracker:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Update tracker
+        run: python scripts/update_progress_tracker.py
+
+      - name: Commit and push tracker changes
+        run: |
+          if git diff --quiet -- progress-tracker.md; then
+            echo "No tracker changes detected."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add progress-tracker.md
+          git commit -m "chore: sync progress tracker"
+          git push

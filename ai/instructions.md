@@ -54,12 +54,15 @@ agents/active/<name>/
 ### New learning item
 
 ```
-learning/<area>/<topic>.md
+learning/courses/<platform>/<topic>.md
   # <Topic>
   Source: <url or course name>
   Status: in-progress | done
+  Progress: 0%
   Notes: ...
 ```
+
+Example: `learning/courses/github/intro-to-actions.md`
 
 ### New project
 

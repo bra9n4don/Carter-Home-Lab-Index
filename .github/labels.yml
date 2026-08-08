@@ -1,0 +1,23 @@
+- name: project
+  color: "0075ca"
+  description: Personal project tracking
+
+- name: course
+  color: "e4e669"
+  description: Course or learning resource tracking
+
+- name: agent
+  color: "d93f0b"
+  description: Agent development
+
+- name: idea
+  color: "cfd3d7"
+  description: Early-stage idea or concept
+
+- name: in-progress
+  color: "fbca04"
+  description: Currently being worked on
+
+- name: done
+  color: "0e8a16"
+  description: Completed

@@ -4,9 +4,7 @@
 
 Manage and document home server application projects, primarily Docker-based services.
 
-## Status
-
-Planning
+Status: planned
 
 ## Stack
 
@@ -17,6 +15,4 @@ Planning
 
 Add a subfolder per application (e.g., `nginx/`, `plex/`, `portainer/`) with its own `docker-compose.yml` and notes.
 
-## Next step
-
-Add the first application subfolder and copy `personal-projects/assets/docker-compose-base.yml` as a starting point.
+Next Step: Add the first application subfolder and copy `personal-projects/assets/docker-compose-base.yml` as a starting point.

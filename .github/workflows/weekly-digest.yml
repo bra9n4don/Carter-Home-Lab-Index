@@ -1,0 +1,61 @@
+name: Weekly Digest
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1"   # Every Monday at 09:00 UTC
+
+jobs:
+  weekly-digest:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Generate digest body
+        id: digest
+        run: |
+          python - << 'EOF'
+          import re
+          from pathlib import Path
+
+          ROOT = Path(".")
+          tracker = ROOT / "progress-tracker.md"
+          text = tracker.read_text(encoding="utf-8")
+
+          lines = text.splitlines()
+          body_lines = [
+              "## Weekly Home Lab Review",
+              "",
+              "Auto-generated from `progress-tracker.md`. Use this issue to jot down notes, blockers, or next steps for the week.",
+              "",
+          ]
+
+          capture = False
+          for line in lines:
+              if line.startswith("## "):
+                  capture = True
+              if capture:
+                  body_lines.append(line)
+
+          body = "\n".join(body_lines)
+          # Write to a file to avoid shell-escaping issues
+          Path("/tmp/digest_body.md").write_text(body, encoding="utf-8")
+          print("Digest body written.")
+          EOF
+
+      - name: Create weekly digest issue
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Weekly Digest — ${{ github.run_id }}"
+          content-filepath: /tmp/digest_body.md
+          labels: in-progress
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

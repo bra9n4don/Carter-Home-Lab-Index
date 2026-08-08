@@ -1,0 +1,59 @@
+name: ➕ Add Repo to Index
+description: Submit a GitHub repo URL to add it to the correct location in the index.
+labels: [add-repo]
+body:
+  - type: input
+    id: repo_url
+    attributes:
+      label: Repository URL
+      description: Full GitHub URL of the repo to add.
+      placeholder: "https://github.com/owner/repo-name"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Where does this repo belong in the index?
+      options:
+        - agent
+        - learning / course
+        - learning / resource
+        - personal-project
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - planned
+        - in-progress
+        - done
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short Description
+      description: One sentence on what this repo does. Leave blank to use the GitHub repo description.
+      placeholder: "e.g. A FastAPI service that proxies requests to OpenAI with rate limiting."
+
+  - type: textarea
+    id: tags
+    attributes:
+      label: Tags / Topics
+      description: Extra tags (one per line) beyond what the GitHub repo already lists.
+      placeholder: |
+        home-lab
+        python
+
+  - type: input
+    id: next_step
+    attributes:
+      label: Next Step (projects only)
+      description: First concrete action to take on this project. Leave blank for learning/agent entries.
+      placeholder: "Set up dev environment and scaffold the project."

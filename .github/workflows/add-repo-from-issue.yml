@@ -1,0 +1,53 @@
+name: Add Repo from Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-repo:
+    if: contains(github.event.issue.labels.*.name, 'add-repo')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Parse issue and add repo entry
+        id: add_repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: python scripts/add_repo_from_issue.py
+
+      - name: Commit and push new entry
+        run: |
+          ENTRY_PATH="${{ steps.add_repo.outputs.entry_path }}"
+          COMMIT_MSG="${{ steps.add_repo.outputs.commit_msg }}"
+          if [ -z "$ENTRY_PATH" ] || ! git diff --name-only HEAD | grep -q "$ENTRY_PATH"; then
+            echo "No new file to commit at ${ENTRY_PATH}."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$ENTRY_PATH"
+          git commit -m "${COMMIT_MSG:-feat: add repo from issue #${{ github.event.issue.number }}}"
+          git push
+
+      - name: Comment and close issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ENTRY_PATH="${{ steps.add_repo.outputs.entry_path }}"
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "✅ Entry added to \`${ENTRY_PATH}\` and committed to \`main\`. Closing this issue."
+          gh issue close ${{ github.event.issue.number }}

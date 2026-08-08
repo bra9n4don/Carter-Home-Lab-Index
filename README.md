@@ -2,6 +2,25 @@
 
 Umbrella home-lab index for **agent development**, **learning courses**, and **personal projects**.
 
+## Structure
+
+| Folder | Purpose |
+|---|---|
+| `agents/` | Agent prompts, workflows, configs, and docs |
+| `learning/` | Courses, notes, resources, and cert prep |
+| `personal-projects/` | Personal builds and experiments |
+| `ai/` | AI instructions and shared prompts for Copilot/agents |
+
+## AI guidance
+
+The `ai/` folder contains repo-specific instructions for Copilot and other agents.
+See [`ai/instructions.md`](ai/instructions.md) for the operating rules.
+
+## Progress tracking
+
+- Repo-wide progress is tracked in [`progress-tracker.md`](progress-tracker.md).
+- It auto-syncs via [`.github/workflows/sync-progress-tracker.yml`](.github/workflows/sync-progress-tracker.yml).
+
 ---
 
 ## 📌 Quick Start
@@ -10,9 +29,10 @@ Umbrella home-lab index for **agent development**, **learning courses**, and **p
    - 🤖 [`agents/`](agents/)
    - 📚 [`learning/`](learning/)
    - 🛠️ [`personal-projects/`](personal-projects/)
-2. Add or update the local README in that area.
-3. Move active work into the correct subfolder (`active/`, `courses/`, etc.).
-4. Commit changes with a clear message:
+2. Read that area's `README.md` for the subfolder layout.
+3. Add or update the local README in that area.
+4. Move active work into the correct subfolder (`active/`, `courses/`, etc.).
+5. Commit changes with a clear message:
    - `feat(agents): ...`
    - `docs(learning): ...`
    - `chore(projects): ...`

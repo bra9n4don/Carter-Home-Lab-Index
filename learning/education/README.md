@@ -1,3 +1,3 @@
-# Education
+# Education (Archived)
 
-Structured education tracks and related course progress entries.
+Course progress entries have moved to `learning/courses/`.

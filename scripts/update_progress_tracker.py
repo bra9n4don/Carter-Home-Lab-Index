@@ -7,7 +7,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 TRACKER_PATH = ROOT / "progress-tracker.md"
-COURSE_BASES = [ROOT / "learning" / "courses", ROOT / "learning" / "education"]
+COURSE_BASES = [ROOT / "learning" / "courses"]
 
 
 @dataclass

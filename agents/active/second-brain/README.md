@@ -15,6 +15,8 @@ A collection of AI assistants that act as a personal second brain: capturing, or
 
 Shared prompts and system context live in [`ai/shared-prompts.md`](../../../ai/shared-prompts.md).
 
+For the broader multi-assistant shared-memory architecture (SharePoint, Notion, and how this repo fits in), see [`agents/docs/shared-memory-design.md`](../../docs/shared-memory-design.md).
+
 ## How to add a new assistant
 
 1. Create a subfolder: `agents/active/second-brain/<name>/`

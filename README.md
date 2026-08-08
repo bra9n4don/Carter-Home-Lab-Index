@@ -14,7 +14,8 @@ Umbrella home-lab index for **agent development**, **learning courses**, and **p
 ## AI guidance
 
 The `ai/` folder contains repo-specific instructions for Copilot and other agents.
-See [`ai/instructions.md`](ai/instructions.md) for the operating rules.
+See [`ai/instructions.md`](ai/instructions.md) for the operating rules and
+[`ai/profile.md`](ai/profile.md) for Brandon's background and preferences.
 
 ## Progress tracking
 

@@ -20,6 +20,7 @@ These instructions apply to Copilot and any AI agents working in this repo.
   - `learning/` — courses, notes, resources, and cert prep
   - `personal-projects/` — personal builds and experiments
   - `ai/` — these instructions and any shared prompts
+- See [`ai/profile.md`](profile.md) for Brandon's background, current homelab focus areas, and working preferences.
 - When planning work, break it into small steps and reference the relevant folder.
 - Do not invent files that do not exist. If a file is missing, say so.
 

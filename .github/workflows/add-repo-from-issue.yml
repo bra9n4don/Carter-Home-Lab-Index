@@ -2,7 +2,7 @@ name: Add Repo from Issue
 
 on:
   issues:
-    types: [opened, reopened]
+    types: [opened]
 
 jobs:
   add-repo:
@@ -22,6 +22,7 @@ jobs:
           python-version: "3.x"
 
       - name: Parse issue and add repo entry
+        id: add_repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_BODY: ${{ github.event.issue.body }}
@@ -30,22 +31,23 @@ jobs:
 
       - name: Commit and push new entry
         run: |
-          if git diff --quiet && git diff --cached --quiet; then
-            echo "No new files to commit."
+          ENTRY_PATH="${{ steps.add_repo.outputs.entry_path }}"
+          COMMIT_MSG="${{ steps.add_repo.outputs.commit_msg }}"
+          if [ -z "$ENTRY_PATH" ] || ! git diff --name-only HEAD | grep -q "$ENTRY_PATH"; then
+            echo "No new file to commit at ${ENTRY_PATH}."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          COMMIT_MSG=$(cat /tmp/add_repo_commit_msg.txt 2>/dev/null || echo "feat: add repo from issue #${{ github.event.issue.number }}")
-          git commit -m "$COMMIT_MSG"
+          git add "$ENTRY_PATH"
+          git commit -m "${COMMIT_MSG:-feat: add repo from issue #${{ github.event.issue.number }}}"
           git push
 
       - name: Comment and close issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ENTRY_PATH=$(cat /tmp/add_repo_entry_path.txt 2>/dev/null || echo "unknown path")
+          ENTRY_PATH="${{ steps.add_repo.outputs.entry_path }}"
           gh issue comment ${{ github.event.issue.number }} \
             --body "✅ Entry added to \`${ENTRY_PATH}\` and committed to \`main\`. Closing this issue."
           gh issue close ${{ github.event.issue.number }}

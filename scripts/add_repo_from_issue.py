@@ -260,15 +260,19 @@ def main() -> None:
     # Write entry
     out: Path
 
-    if "agent" in category.lower():
+    # Map exact issue-form option strings to handlers
+    cat = category.strip().lower()
+    if cat == "agent":
         sub = "archive" if status == "done" else "active"
         out = write_agent_entry(repo_url=repo_url, name=name, description=description, status=status, sub=sub)
+        category_short = "agent"
 
-    elif "learning" in category.lower() or "course" in category.lower() or "resource" in category.lower():
-        sub = "resources" if "resource" in category.lower() else "courses"
+    elif cat in ("learning / course", "learning / resource"):
+        sub = "resources" if cat == "learning / resource" else "courses"
         out = write_learning_entry(repo_url=repo_url, name=name, description=description, status=status, topics=topics, sub=sub)
+        category_short = "learning"
 
-    else:  # personal-project
+    elif cat == "personal-project":
         if status == "done":
             sub = "completed"
         elif status == "in-progress":
@@ -279,15 +283,26 @@ def main() -> None:
             repo_url=repo_url, name=name, description=description, status=status,
             language=language, next_step=next_step, sub=sub,
         )
+        category_short = "project"
+
+    else:
+        print(f"ERROR: Unrecognised category value: {category!r}")
+        sys.exit(1)
 
     rel = out.relative_to(ROOT)
     print(f"Entry written to: {rel}")
 
-    # Write outputs for the workflow steps
-    category_short = category.split("/")[0].strip().split()[0]
+    # Pass data to subsequent workflow steps via GITHUB_OUTPUT
+    github_output = os.environ.get("GITHUB_OUTPUT", "")
     commit_msg = f"feat({category_short}): add {slugify(name)}"
-    Path("/tmp/add_repo_commit_msg.txt").write_text(commit_msg, encoding="utf-8")
-    Path("/tmp/add_repo_entry_path.txt").write_text(str(rel), encoding="utf-8")
+    if github_output:
+        with open(github_output, "a", encoding="utf-8") as fh:
+            fh.write(f"commit_msg={commit_msg}\n")
+            fh.write(f"entry_path={rel}\n")
+    else:
+        # Fallback for local testing
+        Path("/tmp/add_repo_commit_msg.txt").write_text(commit_msg, encoding="utf-8")
+        Path("/tmp/add_repo_entry_path.txt").write_text(str(rel), encoding="utf-8")
 
 
 if __name__ == "__main__":

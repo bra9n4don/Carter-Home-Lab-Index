@@ -17,3 +17,6 @@ __pycache__/
 .vscode/
 .idea/
 *.swp
+
+# Claude Code (personal, not shared)
+.claude/settings.local.json

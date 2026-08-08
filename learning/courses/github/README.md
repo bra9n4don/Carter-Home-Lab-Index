@@ -25,4 +25,4 @@ Platform: GitHub, YouTube, Udemy, etc.
 
 | Course | Source | Status |
 |---|---|---|
-| _(add your first course here)_ | — | — |
+| [Skills: Introduction to GitHub](./skills-introduction-to-github.md) | GitHub Skills — Introduction to GitHub | in-progress |

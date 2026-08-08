@@ -15,6 +15,8 @@ python scripts/update_progress_tracker.py
 | Source | Files picked up |
 |---|---|
 | `learning/courses/**/*.md` | Any `.md` file that is not `README.md` |
+| `personal-projects/active/*/` | Every immediate project folder under `active` |
+| `personal-projects/completed/*/` | Every immediate project folder under `completed` |
 
 **Fields read from each file:**
 

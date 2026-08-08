@@ -10,3 +10,4 @@ Use this area for courses, notes, and study resources.
 - `notes/` — personal notes and summaries
 - `resources/` — references and links
 - `certifications/` — cert prep and completion artifacts
+- `education/` — archived; entries have moved to `courses/` (see `education/README.md`)
